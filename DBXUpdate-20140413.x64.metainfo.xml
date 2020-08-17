@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2020 Microsoft Corporation <richard@hughsie.com> -->
 <component type="firmware">
-  <id>org.linuxfoundation.x64.firmware</id>
-  <name>UEFI dbx</name>
-  <summary>UEFI Security Blocklist</summary>
+  <id>org.linuxfoundation.dbx.x64.firmware</id>
+  <name>Secure Boot dbx</name>
+  <summary>UEFI Secure Boot Forbidden Signature Database</summary>
   <description>
     <p>
       Updating the UEFI dbx prevents starting EFI binaries with known security issues.
@@ -42,6 +42,6 @@
     <value key="LVFS::VersionFormat">number</value>
   </custom>
   <categories>
-    <category>X-Device</category>
+    <category>X-Configuration</category>
   </categories>
 </component>

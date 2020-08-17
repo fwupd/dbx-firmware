@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2020 Microsoft Corporation <richard@hughsie.com> -->
 <component type="firmware">
-  <id>org.linuxfoundation.ia32.firmware</id>
-  <name>UEFI dbx</name>
-  <summary>UEFI Security Blocklist</summary>
+  <id>org.linuxfoundation.dbx.ia32.firmware</id>
+  <name>Secure Boot dbx</name>
+  <summary>UEFI Secure Boot Forbidden Signature Database</summary>
   <description>
     <p>
       Updating the UEFI dbx prevents starting EFI binaries with known security issues.
@@ -24,11 +24,21 @@
       <checksum filename="DBXUpdate-20200729.ia32.bin" target="content"/>
       <description>
         <p>
-          This updates the dbx to the latest release from Microsoft.
+          This updates the dbx to the latest release from Microsoft which adds
+          insecure versions of grub and shim to the list of forbidden signatures
+          due to multiple discovered security updates.
         </p>
       </description>
       <issues>
         <issue type="cve">CVE-2020-10713</issue>
+        <issue type="cve">CVE-2020-14308</issue>
+        <issue type="cve">CVE-2020-14309</issue>
+        <issue type="cve">CVE-2020-14310</issue>
+        <issue type="cve">CVE-2020-14311</issue>
+        <issue type="cve">CVE-2020-15705</issue>
+        <issue type="cve">CVE-2020-15706</issue>
+        <issue type="cve">CVE-2020-15707</issue>
+        <issue type="cve">CVE-2020-7205</issue>
       </issues>
     </release>
   </releases>
@@ -45,6 +55,6 @@
     <value key="LVFS::VersionFormat">number</value>
   </custom>
   <categories>
-    <category>X-Device</category>
+    <category>X-Configuration</category>
   </categories>
 </component>
