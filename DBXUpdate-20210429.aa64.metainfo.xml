@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2021 Richard Hughes <richard@hughsie.com> -->
+<component type="firmware">
+  <id>org.linuxfoundation.dbx.aa64.firmware</id>
+  <name>Secure Boot dbx</name>
+  <name_variant_suffix>aa64</name_variant_suffix>
+  <summary>UEFI Secure Boot Forbidden Signature Database</summary>
+  <description>
+    <p>
+      Updating the UEFI dbx prevents starting EFI binaries with known security issues.
+    </p>
+  </description>
+  <provides>
+    <!-- Microsoft Corporation KEK CA 2011 -
+    UEFI\CRT_A1117F516A32CEFCBA3F2D1ACE10A87972FD6BBE8FE0D0B996E09E65D802A503&ARCH_AA64 -->
+    <firmware type="flashed">67d35028-ca5b-5834-834a-f97380381082</firmware>
+  </provides>
+  <url type="homepage">https://uefi.org/revocationlistfile</url>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>proprietary</project_license>
+  <developer_name>Microsoft Corporation</developer_name>
+  <releases>
+    <!-- for the version use `dbxtool -l -d foo.bin` and count the {microsoft} owner GUIDs -->
+    <release urgency="high" version="21" date="2021-04-29">
+      <checksum filename="DBXUpdate-20210429.aa64.bin" target="content"/>
+      <description>
+        <p>
+          This updates the dbx to the latest release from Microsoft which adds
+          insecure versions of grub and shim to the list of forbidden signatures
+          due to multiple discovered security updates.
+        </p>
+      </description>
+    </release>
+  </releases>
+  <requires>
+    <id compare="ge" version="1.4.6">org.freedesktop.fwupd</id>
+  </requires>
+  <custom>
+    <value key="LVFS::UpdateProtocol">org.uefi.dbx</value>
+    <value key="LVFS::VersionFormat">number</value>
+  </custom>
+  <categories>
+    <category>X-Configuration</category>
+  </categories>
+</component>
