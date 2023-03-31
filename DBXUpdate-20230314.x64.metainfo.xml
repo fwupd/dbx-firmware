@@ -25,9 +25,10 @@
       <checksum filename="DBXUpdate-20230314.x64.bin" target="content"/>
       <description>
         <p>
-          This updates the dbx to the latest release from Microsoft which adds
-          insecure versions of grub and shim to the list of forbidden signatures
-          due to multiple discovered security updates.
+          Insecure versions of software from Trend Micro, vmware, CPSD, Eurosoft, and
+          New Horizon Datasys Inc were added to the list of forbidden signatures due to discovered
+          security problems.
+          This updates the dbx to the latest release from Microsoft.
         </p>
         <p>
           Before installing the update, fwupd will check for any affected executables
@@ -41,7 +42,7 @@
     </release>
   </releases>
   <requires>
-    <id compare="ge" version="1.4.6">org.freedesktop.fwupd</id>
+    <id compare="ge" version="1.8.14">org.freedesktop.fwupd</id>
   </requires>
   <custom>
     <value key="LVFS::UpdateProtocol">org.uefi.dbx</value>
