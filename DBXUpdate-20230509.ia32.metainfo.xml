@@ -23,6 +23,7 @@
     <!-- for the version use `fwupdtool firmware-parse foo.bin efi-signature-list` -->
     <release urgency="high" version="89" date="2023-05-09">
       <checksum filename="DBXUpdate-20230509.ia32.bin" target="content"/>
+      <checksum type="sha256" target="device">490c927242cc6227ca439a7e9aa9d771ad4d1686eede1f331cbb6c69e9be746e</checksum>
       <description>
         <p>
           Insecure versions of the Microsoft Windows boot manager affected by Black Lotus were
