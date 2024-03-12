@@ -56,37 +56,46 @@ class DbxFile:
         return "DbxFile[{}]".format(", ".join(str(entry) for entry in self.entries))
 
 
-def print_stats() -> None:
-    for arch in ["ia32", "aa64", "x64"]:
-        dbxfiles: List[DbxFile] = []
-        for filename in sorted(glob.glob("DBXUpdate*.{}.bin".format(arch))):
-            dbxfiles.append(DbxFile(filename))
-        for idx, dbxfile_new in enumerate(dbxfiles):
+def print_stats(fns: List[str]) -> None:
 
-            if idx == 0:
-                dbxfile_old = None
-                dbxfile_fns = "origin -> {}".format(dbxfile_new.filename)
-            else:
-                dbxfile_old = dbxfiles[idx - 1]
-                dbxfile_new = dbxfiles[idx]
-                dbxfile_fns = "{} -> {}".format(
-                    dbxfile_old.filename, dbxfile_new.filename
-                )
+    dbxfiles: List[DbxFile] = []
+    for filename in fns:
+        dbxfiles.append(DbxFile(filename))
 
-            # look for added hashes
-            for entry in dbxfile_new.entries:
-                if not dbxfile_old or not dbxfile_old.find_entry_from_hash(
-                    entry.checksum
-                ):
-                    print("{} ADD {}".format(dbxfile_fns.ljust(60), str(entry)))
+    for idx, dbxfile_new in enumerate(dbxfiles):
 
-            # look for removed hashes
-            if dbxfile_old:
-                for entry in dbxfile_old.entries:
-                    if not dbxfile_new.find_entry_from_hash(entry.checksum):
-                        print("{} DEL {}".format(dbxfile_fns.ljust(60), str(entry)))
+        if idx == 0:
+            dbxfile_old = None
+            dbxfile_fns = "origin -> {}".format(dbxfile_new.filename)
+        else:
+            dbxfile_old = dbxfiles[idx - 1]
+            dbxfile_new = dbxfiles[idx]
+            dbxfile_fns = "{} -> {}".format(
+                dbxfile_old.filename, dbxfile_new.filename
+            )
+
+        # look for added hashes
+        for entry in dbxfile_new.entries:
+            if not dbxfile_old or not dbxfile_old.find_entry_from_hash(
+                entry.checksum
+            ):
+                print("{} ADD {}".format(dbxfile_fns.ljust(60), str(entry)))
+
+        # look for removed hashes
+        if dbxfile_old:
+            for entry in dbxfile_old.entries:
+                if not dbxfile_new.find_entry_from_hash(entry.checksum):
+                    print("{} DEL {}".format(dbxfile_fns.ljust(60), str(entry)))
 
 
 if __name__ == "__main__":
-    print_stats()
+
+    if len(sys.argv) > 1:
+        print_stats(sys.argv[1:])
+    else:
+        fns: List[str] = []
+        for arch in ["ia32", "aa64", "x64"]:
+            for fn in glob.glob("DBXUpdate*.{}.bin".format(arch)):
+                fns.append(fn)
+        print_stats(sorted(fns))
     sys.exit(0)
