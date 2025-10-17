@@ -21,6 +21,8 @@ all:
 	gcab --create --nopath DBXUpdate-20241101-x64.cab DBXUpdate-20241101.x64.bin DBXUpdate-20241101.x64.metainfo.xml
 	gcab --create --nopath DBXUpdate-20250507-x64.cab DBXUpdate-20250507.x64.bin DBXUpdate-20250507.x64.metainfo.xml
 	gcab --create --nopath DBXUpdate-20250507-legacy-x64.cab DBXUpdate-20250507.x64.bin DBXUpdate-20250507-legacy.x64.metainfo.xml
+	gcab --create --nopath DBXUpdate-20250902-x64.cab DBXUpdate-20250902.x64.bin DBXUpdate-20250902.x64.metainfo.xml
+	gcab --create --nopath DBXUpdate-20250902-ia32.cab DBXUpdate-20250902.ia32.bin DBXUpdate-20250902.ia32.metainfo.xml
 
 clean:
 	rm -f *.cab
