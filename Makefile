@@ -4,7 +4,8 @@ all: \
 	DBUpdate-3P2023+OROM2023.cab \
 	DBUpdate-WIN2023.cab \
 	DBXUpdate-20250507-legacy-x64.cab \
-	DBXUpdate-20250902-x64.cab
+	DBXUpdate-20250902-x64.cab \
+	DBXUpdate-20260402-x64.cab
 
 clean:
 	rm -f *.zip *.cab
@@ -27,4 +28,6 @@ DBUpdate-WIN2023.cab: DBUpdate-WIN2023.zip DBUpdate-WIN2023.metainfo.xml
 DBXUpdate-20250507-legacy-x64.cab: DBXUpdate-20250507.x64.bin DBXUpdate-20250507-legacy.x64.metainfo.xml
 	fwupdtool --force build-cabinet $@ $^
 DBXUpdate-20250902-x64.cab: DBXUpdate-20250902.x64.bin DBXUpdate-20250902.x64.metainfo.xml
+	fwupdtool --force build-cabinet $@ $^
+DBXUpdate-20260402-x64.cab: DBXUpdate-20260402.x64.bin DBXUpdate-20260402.x64.metainfo.xml
 	fwupdtool --force build-cabinet $@ $^
