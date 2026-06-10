@@ -1,28 +1,30 @@
-all:
-	gcab --create --nopath DBXUpdate-20100307-x64.cab DBXUpdate-20100307.x64.bin DBXUpdate-20100307.x64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20140413-x64.cab DBXUpdate-20140413.x64.bin DBXUpdate-20140413.x64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20160809-x64.cab DBXUpdate-20160809.x64.bin DBXUpdate-20160809.x64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20200729-aa64.cab DBXUpdate-20200729.aa64.bin DBXUpdate-20200729.aa64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20200729-ia32.cab DBXUpdate-20200729.ia32.bin DBXUpdate-20200729.ia32.metainfo.xml
-	gcab --create --nopath DBXUpdate-20200729-x64.cab DBXUpdate-20200729.x64.bin DBXUpdate-20200729.x64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20210429-aa64.cab DBXUpdate-20210429.aa64.bin DBXUpdate-20210429.aa64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20210429-ia32.cab DBXUpdate-20210429.ia32.bin DBXUpdate-20210429.ia32.metainfo.xml
-	gcab --create --nopath DBXUpdate-20210429-x64.cab DBXUpdate-20210429.x64.bin DBXUpdate-20210429.x64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20220812-aa64.cab DBXUpdate-20220812.aa64.bin DBXUpdate-20220812.aa64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20220812-ia32.cab DBXUpdate-20220812.ia32.bin DBXUpdate-20220812.ia32.metainfo.xml
-	gcab --create --nopath DBXUpdate-20220812-x64.cab DBXUpdate-20220812.x64.bin DBXUpdate-20220812.x64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20230314-aa64.cab DBXUpdate-20230314.aa64.bin DBXUpdate-20230314.aa64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20230314-ia32.cab DBXUpdate-20230314.ia32.bin DBXUpdate-20230314.ia32.metainfo.xml
-	gcab --create --nopath DBXUpdate-20230314-x64.cab DBXUpdate-20230314.x64.bin DBXUpdate-20230314.x64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20230509-aa64.cab DBXUpdate-20230509.aa64.bin DBXUpdate-20230509.aa64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20230509-ia32.cab DBXUpdate-20230509.ia32.bin DBXUpdate-20230509.ia32.metainfo.xml
-	gcab --create --nopath DBXUpdate-20230509-x64.cab DBXUpdate-20230509.x64.bin DBXUpdate-20230509.x64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20241101-ia32.cab DBXUpdate-20241101.ia32.bin DBXUpdate-20241101.ia32.metainfo.xml
-	gcab --create --nopath DBXUpdate-20241101-x64.cab DBXUpdate-20241101.x64.bin DBXUpdate-20241101.x64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20250507-x64.cab DBXUpdate-20250507.x64.bin DBXUpdate-20250507.x64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20250507-legacy-x64.cab DBXUpdate-20250507.x64.bin DBXUpdate-20250507-legacy.x64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20250902-x64.cab DBXUpdate-20250902.x64.bin DBXUpdate-20250902.x64.metainfo.xml
-	gcab --create --nopath DBXUpdate-20250902-ia32.cab DBXUpdate-20250902.ia32.bin DBXUpdate-20250902.ia32.metainfo.xml
+all: \
+	DBUpdate-3P2023.cab \
+	DBUpdate-3P2023+OROM2023-crtd.cab \
+	DBUpdate-3P2023+OROM2023.cab \
+	DBUpdate-WIN2023.cab \
+	DBXUpdate-20250507-legacy-x64.cab \
+	DBXUpdate-20250902-x64.cab
 
 clean:
-	rm -f *.cab
+	rm -f *.zip *.cab
+
+DBUpdate-3P2023+OROM2023.zip: DBUpdate3P2023.bin DBUpdateOROM2023.bin
+	zip -0 $@ $^
+DBUpdate-3P2023.zip: DBUpdate3P2023.bin
+	zip -0 $@ $^
+DBUpdate-WIN2023.zip: DBUpdate2024.bin
+	zip -0 $@ $^
+DBUpdate-3P2023+OROM2023.cab: DBUpdate-3P2023+OROM2023.zip DBUpdate-3P2023+OROM2023.metainfo.xml
+	fwupdtool --force build-cabinet $@ $^
+DBUpdate-3P2023+OROM2023-crtd.cab: DBUpdate-3P2023+OROM2023.zip DBUpdate-3P2023+OROM2023-crtd.metainfo.xml
+	fwupdtool --force build-cabinet $@ $^
+DBUpdate-3P2023.cab: DBUpdate-3P2023.zip DBUpdate-3P2023.metainfo.xml
+	fwupdtool --force build-cabinet $@ $^
+DBUpdate-WIN2023.cab: DBUpdate-WIN2023.zip DBUpdate-WIN2023.metainfo.xml
+	fwupdtool --force build-cabinet $@ $^
+
+DBXUpdate-20250507-legacy-x64.cab: DBXUpdate-20250507.x64.bin DBXUpdate-20250507-legacy.x64.metainfo.xml
+	fwupdtool --force build-cabinet $@ $^
+DBXUpdate-20250902-x64.cab: DBXUpdate-20250902.x64.bin DBXUpdate-20250902.x64.metainfo.xml
+	fwupdtool --force build-cabinet $@ $^

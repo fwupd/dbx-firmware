@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<component type="firmware">
+  <id>com.microsoft.db-windows.firmware</id>
+  <name>Secure Boot Signature Database</name>
+  <name_variant_suffix>Windows</name_variant_suffix>
+  <summary>UEFI Secure Boot Signature Database</summary>
+  <description>
+    <p>Updating the UEFI KEK allows updating the UEFI Signature Database.</p>
+  </description>
+  <provides>
+    <!-- UEFI\VENDOR_Microsoft&NAME_Windows-UEFI-CA -->
+    <firmware type="flashed">914015a8-9d92-5462-9a9b-f2b361e4faae</firmware>
+  </provides>
+  <url type="homepage">https://fwupd.github.io/libfwupdplugin/uefi-db.html</url>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <categories>
+    <category>X-Configuration</category>
+    <category>X-System</category>
+  </categories>
+  <custom>
+    <value key="LVFS::VersionFormat">number</value>
+    <value key="LVFS::UpdateProtocol">org.uefi.dbx2</value>
+  </custom>
+  <releases>
+    <release version="2023" date="2025-04-29" urgency="high">
+      <checksum filename="DBUpdate-WIN2023.zip" target="content"/>
+      <description>
+        <p>This updates the Windows UEFI Signature Database (the "db") to the latest release from Microsoft.</p>
+        <p>It may be required to successfully dual boot Windows and Linux together.</p>
+      </description>
+    </release>
+  </releases>
+  <requires>
+    <id compare="ge" version="2.1.5">org.freedesktop.fwupd</id>
+  </requires>
+</component>

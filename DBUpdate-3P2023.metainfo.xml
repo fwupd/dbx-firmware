@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<component type="firmware">
+  <id>com.microsoft.db-uefi-3p-without-oprom.firmware</id>
+  <name>Secure Boot Signature Database</name>
+  <name_variant_suffix>Without OptionROM</name_variant_suffix>
+  <summary>UEFI Secure Boot Signature Database</summary>
+  <description>
+    <p>Updating the UEFI KEK allows updating the UEFI Signature Database.</p>
+  </description>
+  <provides>
+    <firmware type="flashed">26f42cba-9bf6-5365-802b-e250eb757e96</firmware>
+  </provides>
+  <url type="homepage">https://fwupd.github.io/libfwupdplugin/uefi-db.html</url>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <categories>
+    <category>X-Configuration</category>
+    <category>X-System</category>
+  </categories>
+  <custom>
+    <value key="LVFS::VersionFormat">number</value>
+    <value key="LVFS::UpdateProtocol">org.uefi.dbx2</value>
+  </custom>
+  <releases>
+    <release version="2023" date="2025-04-29" urgency="high">
+      <checksum filename="DBUpdate-3P2023.zip" target="content"/>
+      <checksum type="sha1" target="device">3eabf20c15c52aa5a908e4b000f356f029cd859e</checksum>
+      <description>
+        <p>This updates the 3rd Party UEFI Signature Database (the "db") to the latest release from Microsoft.</p>
+      </description>
+    </release>
+  </releases>
+  <requires>
+    <id compare="ge" version="2.0.12">org.freedesktop.fwupd</id>
+    <hardware>a3c0bcc5-05f2-52f3-aeeb-c4ea4a082dbb</hardware>
+  </requires>
+</component>
